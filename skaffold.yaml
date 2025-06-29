@@ -7,6 +7,8 @@ deploy:
 build:
   local:
     push: false
+  # googleCloudBuild:
+  #   projectId: ticketing-dev-464320
   artifacts:
     - image: michaelmagic97/auth
       context: auth
