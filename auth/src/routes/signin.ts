@@ -41,7 +41,7 @@ router.post(
     const userJwt = jwt.sign(
       {
         id: existingUser.id,
-        email: existingUser,
+        email: existingUser.email,
       },
       process.env.JWT_KEY!
     );
@@ -51,7 +51,7 @@ router.post(
       jwt: userJwt,
     };
 
-    res.status(200).send({ existingUser });
+    res.status(200).send(existingUser);
   }
 );
 
