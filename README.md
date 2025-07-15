@@ -94,3 +94,43 @@ Each microservice includes:
 - Automated test runners using `Jest` and `Supertest`
 
 ---
+
+# 🧰 Prerequisites & Running Locally
+
+To run the project locally, you’ll need:
+
+- ✅ Docker Desktop
+- ✅ Kubernetes enabled in Docker
+- ✅ Skaffold installed ([Installation Guide](https://skaffold.dev/docs/install/))
+
+---
+
+## ▶️ Start the Application
+
+Navigate to the root of the project and run:
+
+```bash
+skaffold dev
+```
+
+This will:
+
+Build all microservices
+
+Start them inside Kubernetes
+
+Expose the app via ingress-nginx (usually at http://ticketing.dev)
+
+🧾 Update Your Hosts File
+Make sure your /etc/hosts file includes:
+
+```bash
+127.0.0.1 ticketing.dev
+```
+
+🔐 Environment & Secrets
+Secrets are managed manually using Kubernetes secrets. Before starting, you’ll need to create the JWT secret:
+
+```bash
+kubectl create secret generic jwt-secret --from-literal=JWT_KEY=your_jwt_key_here
+```
