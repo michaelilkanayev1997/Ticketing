@@ -1,0 +1,17 @@
+{
+  "name": "@michaelil/common",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "clean": "del-cli ./build/*",
+    "build": "npm run clean && tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "del-cli": "^6.0.0",
+    "typescript": "^5.8.3"
+  }
+}
