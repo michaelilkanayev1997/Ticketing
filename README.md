@@ -1,45 +1,8 @@
 # Ticketing Platform — Microservices-Based E-Commerce System
 
-An advanced, production-grade microservices architecture built to power a full-featured ticketing and e-commerce system. This project serves as an end-to-end example of how to build, deploy, and scale a distributed application using modern technologies across the stack.
-
----
-
-## 🚀 Overview
-
-The Ticketing Platform is a cloud-native, event-driven application designed with scalability, maintainability, and performance in mind. It demonstrates how enterprise-level systems are architected using microservices, asynchronous messaging, secure authentication, and CI/CD workflows- all within a fully containerized Kubernetes environment.
-
----
-
-## 🏗️ Architecture
-
-- **Frontend**: Server-Side Rendered (SSR) React app using **Next.js**, optimized for SEO and performance.
-- **Services**: Each business domain (auth, orders, tickets, payments, etc.) is implemented as its own **isolated microservice** using **Node.js + Express**.
-- **Event Bus**: Real-time inter-service communication via a custom-built, lightning-fast **event bus** using **NATS Streaming**.
-- **Shared Code**: Common logic and TypeScript types are abstracted into a reusable **NPM package** (`@michaelil/common`), consumed across all services.
-- **Authentication**: JWT-based authentication and authorization applied across services.
-- **Data Layer**: Services use either **MongoDB** or **Redis**, chosen based on domain-specific needs.
-- **Infrastructure**: Entire application runs in **Docker containers** orchestrated by **Kubernetes**, fully ready for cloud deployment.
-
----
-
-## 🧱 Core Features
-
-- ⚙️ **Microservices Architecture** — Clean domain separation and async communication between services
-- 📡 **Event-Based Communication** — Services stay loosely coupled and scalable via an internal event bus
-- 🔐 **Secure Auth** — Stateless JWT authentication with access control across all APIs
-- 📦 **Reusable Shared Code** — Type-safe interfaces and middlewares shared using a private NPM package
-- 🌍 **Frontend** — Built with React + Next.js, including SSR for better performance
-- 🐳 **Fully Dockerized** — Every component runs in a container, built for CI/CD and cloud-native deployment
-- ☸️ **Kubernetes-Ready** — Includes manifests and Skaffold config for seamless local and cloud development
-
----
-
-## 📦 Services (So Far...)
-
-- `auth` – Handles signup, signin, signout, and JWT validation
-- `client` – The frontend React/Next.js application
-- `common` – Shared reusable logic and type-safe utilities across services
-- `infra` – Kubernetes and deployment configuration (ingress, NATS, MongoDB, etc.)
+A **scalable**, **cloud-native** ticketing and e-commerce system built with a **production-ready microservices architecture**.  
+This platform uses **event-driven design**, **secure authentication**, and **CI/CD workflows** - all running in a fully containerized **Kubernetes** environment.  
+It demonstrates how real-world systems are structured using **microservices**, **asynchronous communication**, and modern DevOps practices.
 
 ---
 
@@ -55,6 +18,28 @@ The Ticketing Platform is a cloud-native, event-driven application designed with
 | Infra       | Docker, Kubernetes, Skaffold  |
 | Shared Code | Custom NPM Package (`common`) |
 | Testing     | Jest, Supertest               |
+
+---
+
+## 🏗️ Architecture
+
+- 🌐 **Frontend**: SSR React app built with **Next.js**, optimized for SEO and performance.  
+- ⚙️ **Microservices**: Each domain (auth, tickets, orders, payments, etc.) is a standalone **Node.js + Express** service.  
+- 📡 **Event Bus**: High-speed, real-time communication via **NATS Streaming** using publish/subscribe architecture.  
+- 📦 **Shared Code**: Reusable logic and TypeScript types extracted into a custom **NPM package** (`@michaelil/common`).  
+- 🔐 **Authentication**: Stateless, JWT-based authentication applied across services for secure API access.  
+- 🧩 **Data Layer**: Each service uses its own **MongoDB** or **Redis** instance, based on its specific domain needs.  
+- 🐳 **Dockerized**: Every component runs in a **Docker container**, ready for CI/CD and consistent local dev.  
+- ☸️ **Kubernetes**: Full orchestration with **Kubernetes**, including live-reloading and deployment via **Skaffold**.
+
+---
+
+## 📦 Services (So Far...)
+
+- `auth` – Handles signup, signin, signout, and JWT validation
+- `client` – The frontend React/Next.js application
+- `common` – Shared reusable logic and type-safe utilities across services
+- `infra` – Kubernetes and deployment configuration (ingress, NATS, MongoDB, etc.)
 
 ---
 
