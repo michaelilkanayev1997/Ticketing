@@ -6,7 +6,7 @@ An advanced, production-grade microservices architecture built to power a full-f
 
 ## 🚀 Overview
 
-The Ticketing Platform is a cloud-native, event-driven application designed with scalability, maintainability, and performance in mind. It demonstrates how enterprise-level systems are architected using microservices, asynchronous messaging, secure authentication, and CI/CD workflows — all within a fully containerized Kubernetes environment.
+The Ticketing Platform is a cloud-native, event-driven application designed with scalability, maintainability, and performance in mind. It demonstrates how enterprise-level systems are architected using microservices, asynchronous messaging, secure authentication, and CI/CD workflows- all within a fully containerized Kubernetes environment.
 
 ---
 
@@ -41,20 +41,6 @@ The Ticketing Platform is a cloud-native, event-driven application designed with
 - `common` – Shared reusable logic and type-safe utilities across services
 - `infra` – Kubernetes and deployment configuration (ingress, NATS, MongoDB, etc.)
 
-More services (orders, payments, expiration, tickets) coming soon...
-
----
-
-## 🧠 What You’ll Learn by Studying This Project
-
-- Architecting real-world microservice-based applications
-- Solving challenges in **distributed systems** like data consistency, event ordering, and service discovery
-- Building **scalable event-driven applications** using **NATS Streaming**
-- Writing **custom shared libraries** as NPM packages for cross-service code reuse
-- Securing services with **JWT-based auth middleware**
-- Handling **graceful shutdowns**, error boundaries, and testing at the microservice level
-- Deploying everything using **Docker**, **Kubernetes**, and optionally a cloud provider
-
 ---
 
 ## 🛠️ Tech Stack
@@ -87,13 +73,14 @@ ticketing/
 
 ## 🧪 Testing
 
-Each microservice includes:
+Currently, tests are implemented in the `auth` service only.
 
-- **Unit tests** for business logic
-- **Integration tests** for API and database layers
-- Automated test runners using `Jest` and `Supertest`
+To run the tests, navigate to the `auth` folder and execute:
 
----
+```bash
+cd auth
+npm run test
+```
 
 # 🧰 Prerequisites & Running Locally
 
@@ -113,7 +100,7 @@ Navigate to the root of the project and run:
 skaffold dev
 ```
 
-This will:
+### This will:
 
 Build all microservices
 
