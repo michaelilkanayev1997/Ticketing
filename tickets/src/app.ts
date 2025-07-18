@@ -2,7 +2,7 @@ import express from "express";
 import "express-async-errors";
 import bodyParser from "body-parser";
 import cookieSession from "cookie-session";
-import { errorHandler, NotFoundError } from "@michaelil/common";
+import { errorHandler, NotFoundError, currentUser } from "@michaelil/common";
 
 import { createTicketRouter } from "./routes/new";
 
@@ -16,6 +16,8 @@ app.use(
     secure: process.env.NODE_ENV !== "test", // Use secure cookies in production
   })
 );
+
+app.use(currentUser); // Middleware to check if user is authenticated
 
 app.use(createTicketRouter);
 
