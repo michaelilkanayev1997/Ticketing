@@ -4,6 +4,8 @@ import bodyParser from "body-parser";
 import cookieSession from "cookie-session";
 import { errorHandler, NotFoundError } from "@michaelil/common";
 
+import { createTicketRouter } from "./routes/new";
+
 const app = express();
 
 app.set("trust proxy", true); // Trust the first proxy
@@ -14,6 +16,8 @@ app.use(
     secure: process.env.NODE_ENV !== "test", // Use secure cookies in production
   })
 );
+
+app.use(createTicketRouter);
 
 app.all("*", async (req, res) => {
   throw new NotFoundError();
