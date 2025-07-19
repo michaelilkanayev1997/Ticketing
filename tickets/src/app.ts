@@ -6,6 +6,7 @@ import { errorHandler, NotFoundError, currentUser } from "@michaelil/common";
 
 import { createTicketRouter } from "./routes/new";
 import { showTicketRouter } from "./routes/show";
+import { indexTicketRouter } from "./routes/index";
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(currentUser); // Middleware to check if user is authenticated
 
 app.use(createTicketRouter);
 app.use(showTicketRouter);
+app.use(indexTicketRouter);
 
 app.all("*", async (req, res) => {
   throw new NotFoundError();
