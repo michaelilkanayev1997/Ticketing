@@ -1,26 +1,30 @@
 import express, { Request, Response } from "express";
-import { requireAuth } from "@michaelil/common";
+import { body } from "express-validator";
+import { requireAuth, validateRequest } from "@michaelil/common";
+
+import { Ticket } from "../models/ticket";
 
 const router = express.Router();
 
 router.post(
   "/api/tickets",
   requireAuth,
+  [
+    body("title").not().isEmpty().withMessage("Title is required"),
+    body("price")
+      .isFloat({ gt: 0 })
+      .withMessage("Price must be a positive number"),
+  ],
+  validateRequest,
   async (req: Request, res: Response) => {
     const { title, price } = req.body;
 
-    // Validate title and price
-    if (!title || title.length < 3) {
-      return res
-        .status(400)
-        .send({ error: "Title must be at least 3 characters long" });
-    }
-    if (!price || isNaN(price) || price <= 0) {
-      return res.status(400).send({ error: "Price must be a positive number" });
-    }
-
-    // Create a new ticket (this part would typically involve saving to a database)
-    const ticket = { id: Date.now(), title, price };
+    const ticket = Ticket.build({
+      title,
+      price,
+      userId: req.currentUser!.id,
+    });
+    await ticket.save();
 
     res.status(201).send(ticket);
   }
