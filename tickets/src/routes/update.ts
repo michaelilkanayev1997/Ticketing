@@ -8,6 +8,8 @@ import {
 } from "@michaelil/common";
 
 import { Ticket } from "../models/ticket";
+import { TicketUpdatedPublisher } from "../events/publishers/ticket-updated-publisher";
+import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -36,6 +38,14 @@ router.put(
 
     ticket.set({ title, price });
     await ticket.save();
+
+    // Publish an event saying that a ticket was updated
+    new TicketUpdatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+    });
 
     res.send(ticket);
   }
