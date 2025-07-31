@@ -40,7 +40,7 @@ router.put(
     await ticket.save();
 
     // Publish an event saying that a ticket was updated
-    new TicketUpdatedPublisher(natsWrapper.client).publish({
+    await new TicketUpdatedPublisher(natsWrapper.client).publish({
       id: ticket.id,
       title: ticket.title,
       price: ticket.price,
