@@ -23,23 +23,28 @@ It demonstrates how real-world systems are structured using **microservices**, *
 
 ## 🏗️ Architecture
 
-- 🌐 **Frontend**: SSR React app built with **Next.js**, optimized for SEO and performance.  
-- ⚙️ **Microservices**: Each domain (auth, tickets, orders, payments, etc.) is a standalone **Node.js + Express** service.  
-- 📡 **Event Bus**: High-speed, real-time communication via **NATS Streaming** using publish/subscribe architecture.  
-- 📦 **Shared Code**: Reusable logic and TypeScript types extracted into a custom **NPM package** (`@michaelil/common`).  
-- 🔐 **Authentication**: Stateless, JWT-based authentication applied across services for secure API access.  
-- 🧩 **Data Layer**: Each service uses its own **MongoDB** or **Redis** instance, based on its specific domain needs.  
-- 🐳 **Dockerized**: Every component runs in a **Docker container**, ready for CI/CD and consistent local dev.  
+- 🌐 **Frontend**: SSR React app built with **Next.js**, optimized for SEO and performance.
+- ⚙️ **Microservices**: Each domain (auth, tickets, orders, payments, etc.) is a standalone **Node.js + Express** service.
+- 📡 **Event Bus**: High-speed, real-time communication via **NATS Streaming** using publish/subscribe architecture.
+- 📦 **Shared Code**: Reusable logic and TypeScript types extracted into a custom **NPM package** (`@michaelil/common`).
+- 🔐 **Authentication**: Stateless, JWT-based authentication applied across services for secure API access.
+- 🧩 **Data Layer**: Each service uses its own **MongoDB** or **Redis** instance, based on its specific domain needs.
+- 🐳 **Dockerized**: Every component runs in a **Docker container**, ready for CI/CD and consistent local dev.
 - ☸️ **Kubernetes**: Full orchestration with **Kubernetes**, including live-reloading and deployment via **Skaffold**.
 
 ---
 
-## 📦 Services (So Far...)
+## 📦 Services
 
 - `auth` – Handles signup, signin, signout, and JWT validation
 - `client` – The frontend React/Next.js application
 - `common` – Shared reusable logic and type-safe utilities across services
 - `infra` – Kubernetes and deployment configuration (ingress, NATS, MongoDB, etc.)
+- `tickets` – Ticket CRUD operations, event publishing, and ticket management
+- `orders` – Order creation, management, and event publishing
+- `payments` – Payment processing and integration
+- `expiration` – Handles order expiration and timeouts
+- `nats-test` – Utility service for testing NATS event bus
 
 ---
 
@@ -49,7 +54,12 @@ ticketing/
 ├── auth/ # Auth service
 ├── client/ # Frontend app (React + Next.js)
 ├── common/ # Shared npm package for logic & types
+├── expiration/ # Expiration service for order timeouts
 ├── infra/ # Kubernetes manifests
+├── nats-test/ # NATS event bus test utility
+├── orders/ # Orders service
+├── payments/ # Payments service
+├── tickets/ # Tickets service
 ├── node_modules/
 ├── skaffold.yaml # Skaffold config for local dev
 └── README.md # You're here!
@@ -58,12 +68,17 @@ ticketing/
 
 ## 🧪 Testing
 
-Currently, tests are implemented in the `auth` service only.
+Automated tests are implemented in the following services:
 
-To run the tests, navigate to the `auth` folder and execute:
+- `auth`
+- `tickets`
+- `orders`
+- `payments`
+
+To run tests for a service, navigate to its folder and execute:
 
 ```bash
-cd auth
+cd <service>
 npm run test
 ```
 
