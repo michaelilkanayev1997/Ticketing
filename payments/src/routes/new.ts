@@ -5,6 +5,8 @@ import {
   validateRequest,
   BadRequestError,
   NotFoundError,
+  NotAuthorizedError,
+  OrderStatus,
 } from "@michaelil/common";
 
 import { Order } from "../models/order";
@@ -26,13 +28,14 @@ router.post(
     if (!order) {
       throw new NotFoundError();
     }
+    if (order.userId !== req.currentUser!.id) {
+      throw new NotAuthorizedError();
+    }
+    if (order.status === OrderStatus.Cancelled) {
+      throw new BadRequestError("Cannot pay for a cancelled order");
+    }
 
-    order.set({
-      status: "complete",
-    });
-    await order.save();
-
-    res.status(201).send(order);
+    res.send({ success: true });
   }
 );
 
