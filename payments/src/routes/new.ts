@@ -43,7 +43,7 @@ router.post(
       description: `Charge for order ${order.id}`,
     });
 
-    res.send({ success: true });
+    res.status(201).send({ success: true });
   }
 );
 
