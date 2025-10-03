@@ -1,35 +1,39 @@
-const LandingPage = ({ currentUser }) => {
-  return (
-    <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="text-center">
-        <div className="card shadow-sm border-0 p-4">
-          <h2 className="mb-3">
-            {currentUser ? "Welcome back!" : "Welcome to GitTix"}
-          </h2>
-          <p className="text-muted mb-4">
-            {currentUser
-              ? "You're signed in and ready to go."
-              : "Please sign in or create an account to continue."}
-          </p>
+import Link from "next/link";
 
-          {!currentUser && (
-            <div className="d-flex justify-content-center gap-3">
-              <a href="/auth/signin" className="btn btn-primary">
-                Sign In
-              </a>
-              <a href="/auth/signup" className="btn btn-outline-primary">
-                Sign Up
-              </a>
-            </div>
-          )}
-        </div>
-      </div>
+const LandingPage = ({ currentUser, tickets }) => {
+  const ticketList = tickets.map((ticket) => {
+    return (
+      <tr key={ticket.id}>
+        <td>{ticket.title}</td>
+        <td>{ticket.price}</td>
+        <td>
+          <Link href={`/tickets/${ticket.id}`}>View</Link>
+        </td>
+      </tr>
+    );
+  });
+
+  return (
+    <div>
+      <h1>Tickets</h1>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>{ticketList}</tbody>
+      </table>
     </div>
   );
 };
 
 LandingPage.getInitialProps = async (context, client, currentUser) => {
-  return {};
+  const { data } = await client.get("/api/tickets");
+
+  return { tickets: data };
 };
 
 export default LandingPage;
