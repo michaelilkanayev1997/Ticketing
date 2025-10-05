@@ -121,3 +121,9 @@ Secrets are managed manually using Kubernetes secrets. Before starting, you’ll
 ```bash
 kubectl create secret generic jwt-secret --from-literal=JWT_KEY=your_jwt_key_here
 ```
+
+## 🚦 CI/CD & GitHub Actions
+
+This project uses **GitHub Actions** for continuous integration.  
+Whenever a pull request is opened or updated, the workflow automatically detects changes in any service that includes tests (`auth`, `tickets`, `orders`, `payments`).  
+If changes are found, the relevant tests are run before merging to `main`, ensuring code quality and reliability.
